@@ -9,5 +9,28 @@
 </head>
 <body>
   <app-root></app-root>
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.js" integrity="sha256-P8jY+MCe6X2cjNSmF4rQvZIanL5VwUUT4MBnOMncjRU=" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (settings.type == 'POST' || settings.type == 'PUT'
+                || settings.type == 'DELETE' || settings.type == 'GET') {
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/
+                    .test(settings.url))) {
+                    // Only send the token to relative URLs i.e. locally.
+                    xhr.setRequestHeader("X-XSRF-TOKEN", Cookies
+                        .get('XSRF-TOKEN'));
+                }
+            }
+        }
+    });
+</script>
+
 </body>
 </html>
